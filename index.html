@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="es"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes"><meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="apple-mobile-web-app-title" content="Pesca Cádiz">
+<title>Pesca Cádiz</title>
+<link rel="manifest" href="manifest.webmanifest"><link rel="apple-touch-icon" href="icon-180.png"><meta name="theme-color" content="#0071e3">
+<style>
+:root{--bg2:#f5f5f7;--card:#fff;--tx:#1d1d1f;--tx2:#6e6e73;--ln:#d2d2d7;--bl:#0071e3;--gr:#248a3d;--or:#b25000;--rd:#d70015;--nav:rgba(255,255,255,.8);box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg2:#000;--card:#1d1d1f;--tx:#f5f5f7;--tx2:#a1a1a6;--ln:#424245;--bl:#2997ff;--gr:#30d158;--or:#ff9f0a;--rd:#ff453a;--nav:rgba(29,29,31,.8)}}
+:root[data-theme="dark"]{--bg2:#000;--card:#1d1d1f;--tx:#f5f5f7;--tx2:#a1a1a6;--ln:#424245;--bl:#2997ff;--gr:#30d158;--or:#ff9f0a;--rd:#ff453a;--nav:rgba(29,29,31,.8)}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{margin:0;background:var(--bg2);color:var(--tx);font:17px/1.47 -apple-system,BlinkMacSystemFont,"SF Pro Text","SF Pro Display","Helvetica Neue",Helvetica,Arial,sans-serif;-webkit-font-smoothing:antialiased}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:12;background:var(--nav);backdrop-filter:saturate(180%) blur(20px);-webkit-backdrop-filter:saturate(180%) blur(20px)}
+header{position:sticky;top:env(safe-area-inset-top,0px);z-index:11;height:48px;display:flex;align-items:center;justify-content:center;font-weight:600;background:var(--nav);backdrop-filter:saturate(180%) blur(20px);-webkit-backdrop-filter:saturate(180%) blur(20px);border-bottom:1px solid var(--ln)}
+main{max-width:640px;margin:0 auto;padding:28px 16px 120px}
+h1{font-size:40px;line-height:1.1;font-weight:600;letter-spacing:-.022em;margin:2px 0 16px}
+h2{font-size:21px;font-weight:600;letter-spacing:-.01em;margin:0 0 12px}
+.eb{color:var(--tx2);font-size:14px;margin:0;text-transform:capitalize}
+.card{background:var(--card);border-radius:18px;padding:20px;margin:14px 0}
+.big{font-size:88px;line-height:1;font-weight:600;letter-spacing:-.04em}
+.chip{display:inline-block;padding:3px 12px;border-radius:980px;font-size:14px;font-weight:600;background:var(--bg2)}
+.warn{color:var(--rd);font-size:14px;margin:10px 0 0}
+select,input,textarea{font:inherit;width:100%;padding:11px 14px;border:1px solid var(--ln);border-radius:12px;background:var(--card);color:var(--tx);appearance:none;-webkit-appearance:none}
+.sc{display:flex;gap:8px;overflow-x:auto;margin:12px 0;padding-bottom:2px}
+.sc button{flex:none;border:0;border-radius:980px;padding:7px 16px;font:inherit;font-size:15px;background:var(--card);color:var(--tx);cursor:pointer}
+.sc button.on{background:var(--tx);color:var(--card)}
+.btn{border:0;border-radius:980px;padding:12px 24px;font:inherit;font-weight:500;background:var(--bl);color:#fff;width:100%;margin-top:12px}
+.f{display:grid;grid-template-columns:1fr 2fr 34px;gap:10px;align-items:center;font-size:15px;margin:8px 0}
+.bar{height:6px;border-radius:3px;background:var(--bg2);overflow:hidden}.bar i{display:block;height:100%;background:var(--bl);border-radius:3px}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:14px 18px;font-size:15px}.g2 b{display:block;font-size:13px;color:var(--tx2);font-weight:400}
+.tg{display:flex;justify-content:space-between;align-items:center;gap:16px;font-size:15px}.tg input{width:auto}
+.rw{display:flex;align-items:center;gap:12px;padding:12px 0;border-top:1px solid var(--ln);cursor:pointer}.rw:first-of-type{border-top:0}
+.rw .n{font-size:28px;font-weight:600;min-width:46px;letter-spacing:-.02em}.rw div{flex:1;min-width:0}
+.sm{font-size:13px;color:var(--tx2)}
+.fm{display:grid;gap:10px}.fm .c3{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+nav{position:fixed;left:0;right:0;bottom:0;z-index:11;display:flex;background:var(--nav);backdrop-filter:saturate(180%) blur(20px);-webkit-backdrop-filter:saturate(180%) blur(20px);border-top:1px solid var(--ln);padding-bottom:env(safe-area-inset-bottom,0px)}
+nav button{flex:1;border:0;background:none;font:inherit;font-size:13px;padding:12px 0;color:var(--tx2)}nav button.on{color:var(--bl);font-weight:600}
+</style></head><body>
+<header>Pesca Cádiz</header><main id="v"></main>
+<nav><button data-t="0">Hoy</button><button data-t="1">Comparador</button><button data-t="2">Diario</button></nav>
+<script>
+const R=Math.PI/180,cl=(x,a=0,b=100)=>Math.max(a,Math.min(b,x)),P2=12.4206,NM=Date.UTC(2000,0,6,18,14)/36e5,HW0=NM-3.2;
+const $=s=>document.querySelector(s),esc=s=>String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const B=[["Santa María del Mar (Cádiz)",250,1,36.52,-6.34],["La Victoria (Cádiz)",235,1,36.49,-6.32],["Campo Soto (San Fernando)",240,1,36.41,-6.255],["La Barrosa (Chiclana de la Frontera)",255,1,36.34,-6.23],["Valdelagrana (El Puerto de Santa María)",260,.5,36.58,-6.28],["Cortadura (Cádiz)",230,1,36.465,-6.285],["El Chato (Cádiz)",230,1,36.45,-6.265],["La Anegada (Cádiz)",45,.25,36.51,-6.22],["Sancti-Petri (Chiclana de la Frontera)",250,1,36.375,-6.25],["La Cachucha (Puerto Real)",280,.15,36.52,-6.22],["La Casería (San Fernando)",320,.25,36.5,-6.21],["El Conchal (Puerto Real)",270,.15,36.53,-6.21],["La Ministra (Puerto Real)",280,.15,36.51,-6.215],["Bocana del Río (Puerto Real)",300,.2,36.535,-6.215],["El Puerco (Chiclana de la Frontera)",255,1,36.32,-6.22]];
+const S={Lubina:{r:[14,20],sw:1},Dorada:{r:[16,23],sw:0},Sargo:{r:[15,22],sw:-1},Lenguado:{r:[15,21],sw:-1,n:1},Mojarra:{r:[16,24],sw:0}};
+const now=new Date().getHours(),st={tab:0,b:0,sp:"Lubina",day:0,hr:now,ae:false};
+const base=d=>{const x=new Date();x.setHours(0,0,0,0);x.setDate(x.getDate()+d);return x};
+const hh=h=>String(h).padStart(2,"0")+":00",cp=d=>["N","NE","E","SE","S","SO","O","NO"][Math.round(d/45)%8];
+const pr=t=>1014+7*Math.sin(t/31)+2*Math.sin(t/9.3);
+const sim=(T,doy)=>({w:Math.max(2,17+12*Math.sin(T/19+1.3)+7*Math.sin(T/6.1)),wd:(180+150*Math.sin(T/41+.7)+360)%360,hs:Math.max(.2,.9+.85*Math.sin(T/29+2)+.25*Math.sin(T/9)),tp:6+4*(.5+.5*Math.sin(T/33+1)),sd:250+40*Math.sin(T/50),p:pr(T),tw:18.5+3.5*Math.sin(2*Math.PI*(doy-135)/365)});
+let LIVE=null,SRC="sim";
+function wxAt(bi,T,doy){const s=sim(T,doy),l=LIVE&&LIVE[bi].get(Math.round(T)),o=LIVE&&LIVE[bi].get(Math.round(T-6));s.tr=s.p-pr(T-6);if(l)for(const k in l)if(l[k]!=null)s[k]=l[k];if(l&&o&&l.p!=null&&o.p!=null)s.tr=l.p-o.p;return s}
+async function load(){
+ try{
+  const la=B.map(x=>x[3]).join(),lo=B.map(x=>x[4]).join(),q=`&latitude=${la}&longitude=${lo}&timezone=Europe%2FMadrid&timeformat=unixtime&past_days=1&forecast_days=4`;
+  const j=u=>fetch(u).then(r=>{if(!r.ok)throw 0;return r.json()});
+  const [f,m]=await Promise.all([j("https://api.open-meteo.com/v1/forecast?hourly=wind_speed_10m,wind_direction_10m,pressure_msl&wind_speed_unit=kmh"+q),j("https://marine-api.open-meteo.com/v1/marine?hourly=wave_height,wave_period,wave_direction,swell_wave_direction,sea_surface_temperature"+q)]);
+  const F=[].concat(f),M=[].concat(m);const ok=i=>M[i].hourly.wave_height.some(v=>v!=null),ref=M.findIndex((_,i)=>ok(i));
+  LIVE=B.map((_,i)=>{const o=new Map(),put=(t,v)=>{const k=Math.round(t/3600);o.set(k,Object.assign(o.get(k)||{},v))},h=F[i].hourly,k=(M[ok(i)?i:ref]||M[0]).hourly;
+   h.time.forEach((t,j)=>put(t,{w:h.wind_speed_10m[j],wd:h.wind_direction_10m[j],p:h.pressure_msl[j]}));
+   k.time.forEach((t,j)=>put(t,{hs:k.wave_height[j],tp:k.wave_period[j],sd:k.swell_wave_direction[j]??k.wave_direction[j],tw:k.sea_surface_temperature[j]}));return o});
+  SRC="live";
+ }catch(e){LIVE=null;SRC="sim"}
+ if(st.tab!=2)view();
+}
+function calc(b,sp,day,h){
+ const D=base(day),T=D.getTime()/36e5+h,doy=Math.round((D-new Date(D.getFullYear(),0,0))/864e5),s=S[sp],[,ori,sh]=b;
+ const age=(((T-NM)/24)%29.5306+29.5306)%29.5306,ill=(1-Math.cos(2*Math.PI*age/29.5306))/2,coef=Math.round(70+40*Math.cos(4*Math.PI*age/29.5306));
+ const ph=(((T-HW0)%P2)+P2)%P2,tto=P2-ph,up=ph>P2/2,hgt=2+.015*coef*Math.cos(2*Math.PI*ph/P2);
+ const bi=B.indexOf(b),{w,wd,hs,tp,sd,p,tw,tr}=wxAt(bi,T,doy);
+ const eh=hs*sh*(.35+.65*Math.max(0,Math.cos((sd-ori)*R))),rel=Math.cos((wd-ori)*R),on=rel>.35,off=rel<-.35;
+ let M=up?(tto<=1?100:tto<=2?90:tto<=5?90-(tto-2)*10:60-(tto-5)*25/1.21):(ph<=1?75:ph<=5?75-(ph-1)*10:35);
+ M=cl(M+(coef<45?-15:coef<=60?-10:coef<=75?5:coef<=90?10:coef<=105?0:-15));
+ let V=w<=10?95:w<=20?(on?52:78+(off?5:0)):w<=35?50-(w-20)*5/3:Math.max(0,20-(w-35)*2);
+ if(s.sw==1&&on)V+=8;V=cl(V);
+ let O=eh<.5?90:eh<1?(tp>8?78:57):eh<1.5?(tp>10?45:30):Math.max(0,25-(eh-1.5)*40);
+ if(up&&ph>7&&ph<11)O+=5;if(s.sw==1&&eh>.6&&eh<1.2)O+=8;if(s.sw==-1&&eh>.9)O-=10;O=cl(O);
+ let P=tr<-3?40:tr<=-1?95:tr<-.3?78:tr<=.3?62:tr<=2?52:45;if(p<1000&&eh>1.5)P=15;
+ const c=(s.r[0]+s.r[1])/2,dist=Math.max(0,s.r[0]-tw,tw-s.r[1]),Tt=cl(dist?90-dist*12:100-Math.abs(tw-c)*3);
+ const sr=7.6+.55*Math.cos(2*Math.PI*(doy-355)/365),ss=20-1.9*Math.cos(2*Math.PI*(doy-355)/365),x=h+.5;
+ let L=(x>=ss-1&&x<=ss+1)?95:(Math.abs(x-sr)<=1)?85:(x>ss+1||x<sr-1)?60+25*(1-Math.abs(ill-.5)*2):40;
+ if(s.n&&(x>ss||x<sr))L+=10;L=cl(L);
+ const why=[];
+ if(st.ae)why.push("Aviso AEMET activo");if(w>35)why.push("Viento superior a 35 km/h");if(eh>1.5)why.push("Ola efectiva superior a 1,5 m");
+ if(hs>1.2&&sh>.7&&Math.cos((sd-ori)*R)>.7&&sd>=200&&sd<=300)why.push("Mar de fondo del O/SO sin protección");
+ if(coef>105&&(ph<.75||ph>P2-.75))why.push("Pleamar viva: acceso y retirada");
+ return{h,M,V,O,P,Tt,L,S:.35*M+.25*V+.15*O+.1*P+.1*Tt+.05*L,ok:!why.length,why,w,wd,eh,tp,p,tr,tw,coef,tto,up,hgt,ph};
+}
+const hrs=b=>Array.from({length:24},(_,h)=>calc(b,st.sp,st.day,h));
+const lab=(s,ok)=>!ok?["No recomendable","rd"]:s>=80?["Excelente","gr"]:s>=65?["Buena","bl"]:s>=50?["Aceptable","or"]:s>=35?["Mediocre","tx2"]:["No recomendable","rd"];
+function wins(H){const r=[];let a=null;H.forEach((x,i)=>{const g=x.ok&&x.S>=65;if(g&&a==null)a=i;if((!g||i==23)&&a!=null){const e=g?i:i-1;r.push([a,e,Math.max(...H.slice(a,e+1).map(y=>y.S))]);a=null}});return r}
+const ctl=()=>`<div class="sc">${Object.keys(S).map(k=>`<button data-sp="${k}" class="${k==st.sp?"on":""}">${k}</button>`).join("")}</div><div class="sc">${["Hoy","Mañana","Pasado mañana"].map((k,i)=>`<button data-d="${i}" class="${i==st.day?"on":""}">${k}</button>`).join("")}</div>`;
+function chart(H){
+ const Hh=130,bw=11,g=4.5,t=H.map(x=>x.hgt),mn=Math.min(...t),mx=Math.max(...t);let s=`<svg viewBox="0 0 360 ${Hh+22}" width="100%" role="img" aria-label="Índice de pesca por hora">`;
+ H.forEach((x,i)=>{const bh=Math.max(3,x.S*Hh/100),X=i*(bw+g)+2,col=!x.ok?"var(--ln)":x.S>=80?"var(--gr)":x.S>=65?"var(--bl)":x.S>=50?"var(--or)":"var(--tx2)";
+  s+=`<rect x="${X}" y="${Hh-bh}" width="${bw}" height="${bh}" rx="3" fill="${col}" opacity="${i==st.hr?1:.5}"/>`;
+  if(i%3==0)s+=`<text x="${X+bw/2}" y="${Hh+16}" font-size="10" text-anchor="middle" fill="var(--tx2)">${i}</text>`});
+ s+=`<polyline fill="none" stroke="var(--tx)" stroke-width="1.5" stroke-dasharray="3 3" opacity=".45" points="${H.map((x,i)=>`${i*(bw+g)+2+bw/2},${Hh-(x.hgt-mn)/(mx-mn)*Hh*.7-8}`).join(" ")}"/>`;
+ H.forEach((x,i)=>s+=`<rect data-h="${i}" x="${i*(bw+g)}" y="0" width="${bw+g}" height="${Hh}" fill="transparent"/>`);
+ return s+"</svg>";
+}
+function hoy(){
+ const b=B[st.b],H=hrs(b),c=H[st.hr],[l,k]=lab(c.S,c.ok),W=wins(H),d=base(st.day);
+ const F=[["Marea · 35 %","M"],["Viento · 25 %","V"],["Oleaje y fondo · 15 %","O"],["Presión · 10 %","P"],["Temperatura · 10 %","Tt"],["Luz y luna · 5 %","L"]];
+ return `<p class="eb">${d.toLocaleDateString("es-ES",{weekday:"long",day:"numeric",month:"long"})}</p><h1>Tu mejor hora para pescar.</h1>${SRC=="live"?"":'<p class="warn">Datos simulados: no hay conexión con Open-Meteo.</p>'}
+ <select id="sb">${B.map((x,i)=>`<option value="${i}" ${i==st.b?"selected":""}>${x[0]}</option>`).join("")}</select>${ctl()}
+ <div class="card"><p class="eb">${hh(st.hr)} · ${st.sp}</p><div class="big" style="color:var(--${k})">${Math.round(c.S)}</div>
+ <span class="chip" style="color:var(--${k})">${l}</span>${c.ok?"":`<p class="warn">${c.why.join(" · ")}</p>`}</div>
+ <div class="card"><h2>Índice por hora</h2>${chart(H)}<p class="sm">Toca una barra para ver esa hora. La línea discontinua es la marea.</p></div>
+ <div class="card"><h2>Mejores franjas</h2>${W.length?W.map(w=>`<div class="rw" data-h="${w[0]}"><span class="n">${Math.round(w[2])}</span><div>${hh(w[0])} – ${hh(w[1]+1)}<br><span class="sm">Pico del índice en la franja</span></div></div>`).join(""):`<p class="sm">Ninguna franja segura supera 65 este día.</p>`}</div>
+ <div class="card"><h2>Componentes</h2>${F.map(([n,k])=>`<div class="f"><span>${n}</span><div class="bar"><i style="width:${Math.round(c[k])}%"></i></div><span class="sm">${Math.round(c[k])}</span></div>`).join("")}</div>
+ <div class="card"><h2>Condiciones</h2><div class="g2">
+ <div><b>Marea</b>${c.up?"Subiendo":"Bajando"}, coef. ${c.coef}</div><div><b>Pleamar en</b>${c.tto.toFixed(1).replace(".",",")} h</div>
+ <div><b>Viento</b>${Math.round(c.w)} km/h del ${cp(c.wd)}</div><div><b>Ola efectiva</b>${c.eh.toFixed(1).replace(".",",")} m · ${Math.round(c.tp)} s</div>
+ <div><b>Presión</b>${Math.round(c.p)} hPa (${c.tr>0?"+":"−"}${Math.abs(c.tr).toFixed(1).replace(".",",")} en 6 h)</div><div><b>Agua</b>${c.tw.toFixed(1).replace(".",",")} °C</div></div></div>
+ <div class="card"><label class="tg"><span>Simular aviso de AEMET<br><span class="sm">Bloquea toda recomendación mientras esté activo.</span></span><input type="checkbox" id="ae" ${st.ae?"checked":""}></label></div>
+ <p class="sm">${SRC=="live"?"Viento, presión, oleaje y temperatura del agua: Open-Meteo, en vivo en un punto frente a cada playa.":"Mostrando datos simulados."} La marea es una estimación astronómica aproximada. El índice es una probabilidad relativa de actividad, no una garantía de captura.</p>`;
+}
+function cmp(){
+ const R2=B.map((b,i)=>{const H=hrs(b),ok=H.filter(x=>x.ok),best=(ok.length?ok:H).reduce((a,x)=>x.S>a.S?x:a);return{i,n:b[0],best,safe:ok.length>0}}).sort((a,b)=>(b.safe-a.safe)||(b.best.S-a.best.S));
+ return `<h1>Comparador.</h1>${ctl()}<div class="card">${R2.map(r=>{const[l,k]=lab(r.best.S,r.safe);return`<div class="rw" data-b="${r.i}"><span class="n" style="color:var(--${k})">${r.safe?Math.round(r.best.S):"—"}</span><div>${esc(r.n)}<br><span class="sm">${r.safe?`Mejor hora ${hh(r.best.h)} · ${l}`:"Sin horas seguras"}</span></div></div>`}).join("")}</div>
+ <p class="sm">Ordenado por seguridad y por la mejor hora del día para ${st.sp.toLowerCase()}. Las playas sin horas seguras van al final.</p>`;
+}
+let mem=[];const ld=()=>{try{return JSON.parse(localStorage.getItem("pc.d")||"[]")}catch(e){return mem}},sv=a=>{mem=a;try{localStorage.setItem("pc.d",JSON.stringify(a))}catch(e){}};
+function dia(){
+ const L=ld(),a=L.filter(x=>x.cap>0),z=L.filter(x=>!x.cap),m=x=>x.length?Math.round(x.reduce((s,y)=>s+y.S,0)/x.length):"—";
+ return `<h1>Diario de capturas.</h1><div class="card fm"><select id="db">${B.map((x,i)=>`<option value="${i}">${x[0]}</option>`).join("")}</select>
+ <select id="ds">${Object.keys(S).map(k=>`<option>${k}</option>`).join("")}</select>
+ <div class="c3"><input id="dl" type="number" min="0" placeholder="Lances"><input id="dp" type="number" min="0" placeholder="Picadas"><input id="dc" type="number" min="0" placeholder="Capturas"></div>
+ <textarea id="dn" rows="2" placeholder="Notas: cebo, plomo, zona…"></textarea><button class="btn" id="sv">Guardar salida</button></div>
+ <div class="card"><h2>Calibración</h2><p class="sm" style="margin:0">${L.length<5?"Guarda al menos 5 salidas para comparar el índice con tus resultados.":`Índice medio con capturas: ${m(a)} · sin capturas: ${m(z)}.`}${L.length>=30?" Ya tienes datos suficientes para recalcular los pesos con una regresión logística.":` Salidas guardadas: ${L.length} de 30.`}</p></div>
+ <div class="card"><h2>Salidas</h2>${L.length?L.slice().reverse().map((x,j)=>`<div class="rw" style="cursor:default"><span class="n">${Math.round(x.S)}</span><div>${esc(x.b)} · ${esc(x.sp)}<br><span class="sm">${esc(x.d)} · ${x.cap||0} capturas, ${x.pic||0} picadas, coef. ${x.coef}${x.n?" · "+esc(x.n):""}</span></div><button class="sc" style="all:unset;color:var(--bl);font-size:14px;cursor:pointer" data-x="${L.length-1-j}">Borrar</button></div>`).join(""):`<p class="sm">Aún no hay salidas.</p>`}</div>`;
+}
+function view(){document.querySelectorAll("nav button").forEach(b=>b.classList.toggle("on",+b.dataset.t==st.tab));$("#v").innerHTML=[hoy,cmp,dia][st.tab]()}
+document.addEventListener("click",e=>{
+ const t=e.target.closest("[data-h],[data-sp],[data-d],[data-b],[data-x],[data-t],#sv");if(!t)return;const d=t.dataset;
+ if(d.t!=null)st.tab=+d.t;else if(d.h!=null)st.hr=+d.h;else if(d.sp)st.sp=d.sp;else if(d.d!=null){st.day=+d.d;st.hr=st.day?18:now}
+ else if(d.b!=null){st.b=+d.b;st.tab=0;st.hr=Math.round(calc(B[st.b],st.sp,st.day,0).h)||st.hr}
+ else if(d.x!=null){const L=ld();L.splice(+d.x,1);sv(L)}
+ else if(t.id=="sv"){const bi=+$("#db").value,sp=$("#ds").value,c=calc(B[bi],sp,0,now),L=ld(),n=v=>+$(v).value||0;
+  L.push({d:new Date().toLocaleDateString("es-ES",{day:"numeric",month:"short"}),b:B[bi][0],sp,S:c.S,coef:c.coef,lan:n("#dl"),pic:n("#dp"),cap:n("#dc"),n:$("#dn").value.trim().slice(0,80)});sv(L)}
+ view();
+});
+document.addEventListener("change",e=>{if(e.target.id=="sb"){st.b=+e.target.value;view()}if(e.target.id=="ae"){st.ae=e.target.checked;view()}});
+view();load();document.addEventListener("visibilitychange",()=>{if(!document.hidden)load()});if("serviceWorker"in navigator)navigator.serviceWorker.register("sw.js").catch(()=>{});
+</script></body></html>
